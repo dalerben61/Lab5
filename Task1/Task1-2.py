@@ -1,6 +1,6 @@
 from gfxhat import lcd
 from gfxhat import backlight
-def horizontalLine()
+def horizontalLine():
     lcd.clear()
     lcd.show()
 
