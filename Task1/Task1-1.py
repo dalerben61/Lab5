@@ -1,10 +1,10 @@
 from gfxhat import lcd
 from gfxhat import backlight
-def verticalLine():
+
+def verticalLine(x):
     lcd.clear()
     lcd.show()
 
-    x = int(input("Set a value for x. "))
     y = 0
     while (y <= 63):
         lcd.set_pixel(x,y,1)
@@ -13,3 +13,7 @@ def verticalLine():
     backlight.set_all(0,255,0)
     backlight.show()
     lcd.show()
+    return
+
+x = int(input("Set a value for x. "))
+verticalLine(x)

@@ -1,6 +1,9 @@
 import math
 import random
 from math import pi
+from gfxhat import lcd
+from gfxhat import backlight
+import time
 
 
 def calculateAreaOfCircle(radius):
@@ -24,11 +27,10 @@ def calculateDistanceBetweenPoints():
     distance = math.sqrt( ((x - x1) ** 2) + ((y - y1) ** 2) )
     return distance
 
-def verticalLine():
+def verticalLine(x):
     lcd.clear()
     lcd.show()
 
-    x = int(input("Set a value for x. "))
     y = 0
     while (y <= 63):
         lcd.set_pixel(x,y,1)
@@ -37,12 +39,12 @@ def verticalLine():
     backlight.set_all(0,255,0)
     backlight.show()
     lcd.show()
+    return
 
-def horizontalLine():
+def horizontalLine(y):
     lcd.clear()
     lcd.show()
 
-    y = int(input("Set a value for y. "))
     x = 0
     while (x <= 127):
         lcd.set_pixel(x,y,1)
@@ -51,33 +53,40 @@ def horizontalLine():
     backlight.set_all(0,255,0)
     backlight.show()
     lcd.show()
+    return
 
-def staircase():
+def staircase(w, h):
     lcd.clear()
     lcd.show()
 
     x = 15
     y = 8
-    w = int(input("Input the width of one stair. "))
-    h = int(input("Set the height of one stair. "))
 
     while x >= 0 and x <= 127 and y >=0 and y <= 63:
-        for x in range(w):
+        a = 0
+        b = 0
+
+        for a in range(0,w):
             lcd.set_pixel(x,y,1)
             x = x + 1
+            if a == w - 1 or x == 127:
+                break
         
-        for y in range(h):
-            lcd.set_pixel
+        for b in range(0,h):
+            lcd.set_pixel(x,y,1)
             y = y + 1
+            if b == h - 1 or y == 127:
+                break
 
+    
     backlight.set_all(0,255,0)
     backlight.show()
     lcd.show()
+    return
 
-def randomPixels():
+def randomPixels(length):
     lcd.clear()
     lcd.show()
-    length = float(input("For how much seconds will the program show random pixels on the GFX Hat? "))
     timestop = time.time() + length
     backlight.set_all(0,255,0)
     backlight.show()
@@ -85,10 +94,13 @@ def randomPixels():
     while time.time() <= timestop:
         x = random.randint(1,127)
         y = random.randint(1,63)
-        lcd.set(x,y,1)
+        lcd.set_pixel(x,y,1)
         lcd.show()
         time.sleep(0.2)
+
+    return
 
 def clearBacklight():
     backlight.set_all(0,0,0)
     backlight.show()
+    return
